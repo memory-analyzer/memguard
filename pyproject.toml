@@ -1,0 +1,61 @@
+[build-system]
+requires      = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name        = "memguard"
+version     = "1.0.0"
+description = "AI-powered memory leak detector and interactive debugger"
+readme      = "README.md"
+requires-python = ">=3.11"
+license     = {text = "MIT"}
+
+dependencies = [
+
+    "pydantic>=2.5",
+    "httpx>=0.26",
+    "anyio>=4.2",
+
+    "typer>=0.12",
+    "rich>=13.7",
+
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.28",
+    "websockets>=12",
+
+    "watchfiles>=0.21",
+
+    "memray>=1.11; sys_platform != 'win32'",
+
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.23",
+    "pytest-cov>=4",
+    "black",
+    "ruff",
+    "mypy",
+]
+
+[project.scripts]
+memguard = "memguard.cli.main:main"
+
+[project.entry-points."memguard.languages"]
+c      = "memguard.languages:CAnalyzer"
+python = "memguard.languages:PythonAnalyzer"
+rust   = "memguard.languages:RustAnalyzer"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["memguard*"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
