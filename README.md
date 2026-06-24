@@ -17,7 +17,6 @@ No cloud. No telemetry. Everything runs on your machine.
 
 <p align="center">
   <img src="example_outputs/gui2.png" alt="MemGuard — Heap Memory Profile" width="100%"/>
-  <br><em>Heap profiling with heaptrack — timeline, top allocators, and flame graph</em>
 </p>
 
 <p align="center">
